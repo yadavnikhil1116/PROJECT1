@@ -11,13 +11,13 @@ router.route("/")
     .get(wrapAsync(listingController.index))  //index route
     .post(isLoggedIn, upload.single('listing[image]'), validateListings, wrapAsync(listingController.createNewListing));   //create route
 
-router.get('/new', isLoggedIn, listingController.renderNewForm);  //renderNewPage route
+router.get('/listings/new', isLoggedIn, listingController.renderNewForm);  //renderNewPage route
 
-router.route("/:id")
+router.route("/listings/:id")
     .put(isLoggedIn, isOwner, upload.single('listing[image]'), validateListings, wrapAsync(listingController.EditListing))  //edit route
     .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing))   //delete route
     .get(wrapAsync(listingController.showListing));  //show route
 
-router.get('/:id/edit', isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));  //renderEditPage route
+router.get('/listings/:id/edit', isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));  //renderEditPage route
 
 module.exports = router;
